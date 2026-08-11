@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07111f"><title>AICTE SecureMeet — Demo</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,Arial;background:#f4f7fb;color:#0f172a}button,input{font:inherit}button{cursor:pointer;border:0}.hide{display:none!important}
+.auth{min-height:100vh;display:grid;place-items:center;padding:18px;background:linear-gradient(135deg,#dbeafe,#f8fafc)}.box{width:min(430px,100%);background:#fff;padding:28px;border-radius:24px;box-shadow:0 20px 70px #0002}.logo{font-size:22px;font-weight:900}.badge{display:inline-block;margin:18px 0 5px;padding:7px 10px;border-radius:99px;background:#ecfdf5;color:#047857;font-size:11px;font-weight:800}label{display:block;font-size:13px;font-weight:700;margin:14px 0}input{width:100%;padding:12px;border:1px solid #d8e0ea;border-radius:10px;margin-top:6px}button{padding:11px 15px;border-radius:10px;font-weight:800}.primary{background:#2563eb;color:#fff}.muted{color:#64748b}.error{background:#fef2f2;color:#b91c1c;padding:9px;border-radius:9px;font-size:13px}
+.top{height:68px;background:#07111f;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 18px}.top .logo{color:#fff}.user{display:flex;gap:10px;align-items:center}.avatar{width:36px;height:36px;border-radius:50%;background:#2563eb;display:grid;place-items:center;font-weight:900}
+.main{max-width:1150px;margin:auto;padding:30px 16px}.hero{display:flex;justify-content:space-between;gap:15px;align-items:end;margin-bottom:20px}.hero h1{font-size:clamp(28px,5vw,43px);margin:6px 0}.eyebrow{font-size:11px;color:#2563eb;font-weight:900;letter-spacing:.12em}.pill{padding:9px 12px;border-radius:99px;background:#eff6ff;color:#1d4ed8;font-size:12px;font-weight:800}.cards{display:grid;grid-template-columns:2fr 1fr 1fr;gap:14px}.card,.stat{background:#fff;border:1px solid #e2e8f0;border-radius:17px;padding:19px}.create{display:flex;gap:8px;margin-top:14px}.create input{margin:0}.stat strong{font-size:28px;display:block;margin-top:8px}.section{margin-top:15px}.meeting{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px;border:1px solid #edf1f6;border-radius:12px;margin:8px 0}.meeting small{display:block;color:#64748b;margin-top:4px}
+.room{height:100vh;background:#050b14;color:white;display:flex;flex-direction:column}.roomtop{height:62px;background:#0b1422;display:flex;justify-content:space-between;align-items:center;padding:0 14px}.roomtop small{display:block;color:#94a3b8}.body{flex:1;min-height:0;display:grid;grid-template-columns:1fr 300px}.videos{padding:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;overflow:auto}.tile{position:relative;min-height:190px;background:#111827;border-radius:13px;overflow:hidden}.tile video{width:100%;height:100%;object-fit:cover}.label{position:absolute;bottom:8px;left:8px;background:#0009;padding:5px 8px;border-radius:6px;font-size:12px}.fake{height:100%;display:grid;place-items:center;font-size:55px;font-weight:900;background:radial-gradient(circle,#1e3a8a,#111827)}.chat{background:#0b1422;border-left:1px solid #1e293b;display:flex;flex-direction:column}.chathead{padding:15px;border-bottom:1px solid #1e293b;font-weight:900}.msgs{flex:1;overflow:auto;padding:12px}.msg{margin-bottom:12px}.msg b{display:block;color:#93c5fd;font-size:11px}.msg span{font-size:13px}.chatform{display:flex;gap:6px;padding:9px;border-top:1px solid #1e293b}.chatform input{margin:0;background:#111827;color:white;border-color:#334155}.chatform button{background:#2563eb;color:white}.controls{height:74px;display:flex;justify-content:center;align-items:center;gap:9px;background:#0b1422;border-top:1px solid #1e293b}.ctrl{width:44px;height:44px;border-radius:50%;background:#1e293b;color:#fff;padding:0}.off{background:#7f1d1d!important}.leave{background:#dc2626;color:#fff}
+@media(max-width:800px){.cards{grid-template-columns:1fr 1fr}.cards .card{grid-column:1/-1}.hero{display:block}.pill{display:inline-block;margin-top:12px}.body{grid-template-columns:1fr}.chat{display:none}.videos{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.cards{grid-template-columns:1fr}.cards .card{grid-column:auto}.create{display:block}.create button{width:100%;margin-top:8px}.meeting{align-items:flex-start}.videos{grid-template-columns:1fr}.tile{min-height:220px}.role{display:none}}
+</style></head><body>
+
+<div id="login" class="auth"><div class="box">
+<div class="logo">🛡️ AICTE SecureMeet</div><p class="muted">Personalized secure online meeting demo.</p>
+<div class="badge">DEMO MODE · SYNTHETIC DATA</div>
+<form id="form"><label>Email<input id="email" value="demo.admin@securemeet.local" required></label>
+<label>Password<input id="pass" type="password" value="DemoPass123!" required></label>
+<div id="err" class="error hide"></div><button class="primary" style="width:100%">Sign in</button></form>
+<p class="muted" style="font-size:12px">Demo password: <b>DemoPass123!</b></p>
+</div></div>
+
+<div id="dash" class="hide"><header class="top"><div class="logo">🛡️ SecureMeet</div><div class="user"><span id="role" class="role"></span><span id="avatar" class="avatar">A</span><button id="logout" style="background:transparent;color:white">Logout</button></div></header>
+<main class="main"><section class="hero"><div><div class="eyebrow">SECURE COLLABORATION PORTAL</div><h1 id="welcome">Welcome.</h1><p class="muted">Schedule meetings and launch the secure demo room.</p></div><div class="pill">🔒 Protected demo</div></section>
+<section class="cards"><div class="card"><b>📹 Create a meeting</b><div class="create"><input id="title" maxlength="100" placeholder="Faculty coordination meeting"><button id="create" class="primary">＋ Create</button></div></div>
+<div class="stat">📅<strong id="count">0</strong><span class="muted">Meetings</span></div><div class="stat">🛡️<strong>Demo</strong><span class="muted">Environment</span></div></section>
+<section class="card section"><h2>Upcoming meetings</h2><div id="list"></div></section>
+<section class="card section"><h2>Security</h2><p class="muted">This single-file demo provides responsive UI, role-aware demo login, local meeting storage, browser camera/microphone preview, screen sharing and local chat. For real confidential meetings, add a backend, authentication service, database, TURN server, private recording storage, MFA/SSO and audit logging.</p></section>
+</main></div>
+
+<div id="room" class="room hide"><header class="roomtop"><div><b id="rtitle">Secure Meeting</b><small>Demo room · browser WebRTC preview</small></div><button id="leave1" class="leave">Leave</button></header>
+<main class="body"><section class="videos"><div class="tile"><video id="video" autoplay muted playsinline></video><div class="label">You · Camera</div></div><div class="tile"><div class="fake">AI</div><div class="label">Demo participant · AICTE</div></div><div class="tile"><div class="fake">H</div><div class="label">Demo participant · HOD</div></div></section>
+<aside class="chat"><div class="chathead">💬 Meeting chat</div><div id="msgs" class="msgs"></div><form id="chatform" class="chatform"><input id="chat" maxlength="500" placeholder="Message..."><button>Send</button></form></aside></main>
+<footer class="controls"><button id="mic" class="ctrl">🎙️</button><button id="cam" class="ctrl">📷</button><button id="screen" class="ctrl">🖥️</button><button id="chatbtn" class="ctrl">💬</button><button id="leave2" class="leave">Leave meeting</button></footer></div>
+
+<script>
+const D={"demo.admin@securemeet.local":["Demo Administrator","Admin"],"demo.hod@securemeet.local":["Demo HOD","HOD"],"demo.faculty@securemeet.local":["Demo Faculty","Faculty"],"demo.institute@securemeet.local":["Demo Institute","Institute"]};
+const PASS="DemoPass123!";let user=JSON.parse(localStorage.getItem("sm_user")||"null"),meetings=JSON.parse(localStorage.getItem("sm_meetings")||"[]"),stream=null,screen=null,mic=true,cam=true;
+const $=x=>document.getElementById(x),save=()=>localStorage.setItem("sm_meetings",JSON.stringify(meetings));
+function show(x){$("login").classList.add("hide");$("dash").classList.add("hide");$("room").classList.add("hide");$(x).classList.remove("hide")}
+function render(){show("dash");$("welcome").textContent="Welcome, "+user[0].split(" ")[1]+".";$("role").textContent=user[1]+" · Demo";$("avatar").textContent=user[0][0];$("count").textContent=meetings.length;
+$("list").innerHTML=meetings.length?meetings.map(m=>'<div class="meeting"><div><b>'+esc(m.title)+'</b><small>'+new Date(m.date).toLocaleString()+' · '+m.id.slice(0,8)+'</small></div><button class="primary" onclick="join('+JSON.stringify(m.id)+')">Join 📹</button></div>').join(""):'<p class="muted">No meetings yet. Create one above.</p>'}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+$("form").onsubmit=e=>{e.preventDefault();let em=$("email").value.toLowerCase().trim();if(D[em]&&$("pass").value===PASS){user=[...D[em],em];localStorage.setItem("sm_user",JSON.stringify(user));render()}else{$("err").textContent="Invalid demo login.";$("err").classList.remove("hide")}};
+$("logout").onclick=()=>{stop();user=null;localStorage.removeItem("sm_user");show("login")};
+$("create").onclick=()=>{let t=$("title").value.trim();if(!t)return alert("Enter a meeting title");let m={id:(crypto.randomUUID?crypto.randomUUID():"SM"+Date.now()),title:t,date:new Date().toISOString()};meetings.unshift(m);save();$("title").value="";render();join(m.id)};
+window.join=async id=>{let m=meetings.find(x=>x.id===id);if(!m)return;$("rtitle").textContent=m.title;show("room");$("msgs").innerHTML="";msg("SecureMeet","Welcome to the demo meeting.");try{stream=await navigator.mediaDevices.getUserMedia({video:true,audio:true});$("video").srcObject=stream}catch(e){msg("System","Camera/microphone permission was not available. The demo UI still works.")}};
+function msg(a,b){$("msgs").insertAdjacentHTML("beforeend",'<div class="msg"><b>'+esc(a)+'</b><span>'+esc(b)+'</span></div>');$("msgs").scrollTop=$("msgs").scrollHeight}
+$("chatform").onsubmit=e=>{e.preventDefault();let v=$("chat").value.trim();if(v){msg(user[0],v);$("chat").value=""}};
+$("mic").onclick=()=>{mic=!mic;(stream?.getAudioTracks()||[]).forEach(t=>t.enabled=mic);$("mic").classList.toggle("off",!mic)};
+$("cam").onclick=()=>{cam=!cam;(stream?.getVideoTracks()||[]).forEach(t=>t.enabled=cam);$("cam").classList.toggle("off",!cam)};
+$("screen").onclick=async()=>{try{screen=await navigator.mediaDevices.getDisplayMedia({video:true});$("video").srcObject=screen;screen.getVideoTracks()[0].onended=()=>{$("video").srcObject=stream}}catch{}};
+$("chatbtn").onclick=()=>{document.querySelector(".chat").style.display=document.querySelector(".chat").style.display==="none"?"flex":"none"};
+function stop(){stream?.getTracks().forEach(t=>t.stop());screen?.getTracks().forEach(t=>t.stop());stream=null;screen=null}
+$("leave1").onclick=$("leave2").onclick=()=>{stop();render()};
+if(user&&D[user[2]])render();else show("login");
+</script></body></html>
